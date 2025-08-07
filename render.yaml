@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: mcp-vertx-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /mcp/sse
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MONGODB_URI
+        value: mongodb://localhost:27017/mcp_vertx
+      - key: JAVA_OPTS
+        value: -Xmx1g -Xms512m
+    buildCommand: ./gradlew build
+    startCommand: java $JAVA_OPTS -jar build/libs/*.jar
+
+databases:
+  - name: mcp-mongodb
+    databaseName: mcp_vertx
+    plan: free 

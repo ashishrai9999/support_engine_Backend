@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>hello</p>
+</body>
+<script>
+    const eventSource = new EventSource("http://localhost:8080/mcp/sse");
+    eventSource.onmessage = (e) => console.log("SSE Message:", e.data);
+    eventSource.addEventListener("result", (e) => console.log("Result event:", e.data));
+</script>
+</html>
